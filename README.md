@@ -3,6 +3,8 @@ urlregex
 
 express-like named url parameters extracting from url
 
+Library will generate regex based on provided url pattern. Later you will be able to match against some url, and read named params values if they are present.
+
 ## Example
 ```Go
 package main
@@ -13,19 +15,15 @@ import (
 )
 
 func main() {
-  // express-like url named params
 	reg := urlregex.Pattern("some/:name/path/:other/")
-	
-	// extract named params values from given url string
-	res, err := reg.Match("some/123/path/456/")
+	fmt.Println("regex: " + reg.Regex.String())
 
-  // err returned -> no matches
+	res, err := reg.Match("some/123/path/456/")
 	if err != nil {
 		fmt.Println("no matches")
 		return
 	}
 
-  // we have matches
 	fmt.Println("found matches")
 	for k, v := range res {
 		fmt.Println(k + ": " + v)
@@ -35,6 +33,7 @@ func main() {
 
 This will output:
 ```
+regex: ^some\/(?P<name>.[^\/]*)\/path\/(?P<other>.[^\/]*)\/$
 found matches
 name: 123
 other: 456
