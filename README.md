@@ -1,4 +1,4 @@
-urlreg
+urlregex
 ======
 
 express-like named url parameters extracting from url
@@ -9,12 +9,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/ivpusic/urlreg"
+	"github.com/ivpusic/urlregex"
 )
 
 func main() {
   // express-like url named params
-	reg := urlreg.Pattern("some/:name/path/:other/")
+	reg := urlregex.Pattern("some/:name/path/:other/")
 	
 	// extract named params values from given url string
 	res, err := reg.Match("some/123/path/456/")
@@ -46,11 +46,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/ivpusic/urlreg"
+	"github.com/ivpusic/urlregex"
 )
 
 func main() {
-	reg := urlreg.Pattern("some/123/path/456")
+	reg := urlregex.Pattern("some/123/path/456")
 	
 	// in this case let's pass something invalid
 	_, err := reg.Match("some/123/path/invalid")
@@ -68,6 +68,23 @@ This will output
 not matched
 ```
 However if we passed ``some/123/path/456`` to ``Match`` method, then it would output ``matched``.
+
+#### Access actual go regex instance
+```Go
+package main
+
+import (
+	"fmt"
+	"github.com/ivpusic/urlregex"
+)
+
+func main() {
+	reg := urlregex.Pattern("some/:name/path/:other/")
+	// native generated *Regex instance
+	fmt.Println(reg.Regex)
+}
+
+```
 
 # License
 MIT
