@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/ivpusic/urlreg"
+	"github.com/ivpusic/urlregex"
 )
 
 func main() {
-	reg := urlreg.Pattern("some/:name/path/:other/")
+	reg := urlregex.Pattern("some/:name/path/:other/")
 	res, err := reg.Match("some/123/path/456/")
 
 	if err != nil {

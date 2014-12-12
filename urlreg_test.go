@@ -1,4 +1,4 @@
-package urlreg
+package urlregex
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -8,19 +8,19 @@ import (
 func TestPattern(t *testing.T) {
 	pattern := Pattern("some/:cool/pattern/:value")
 	assert.NotNil(t, pattern)
-	assert.Equal(t, pattern.regex.String(), "^some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)$")
+	assert.Equal(t, pattern.Regex.String(), "^some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)$")
 
 	pattern = Pattern("some/:cool/pattern/:value/")
 	assert.NotNil(t, pattern)
-	assert.Equal(t, pattern.regex.String(), "^some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)\\/$")
+	assert.Equal(t, pattern.Regex.String(), "^some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)\\/$")
 
 	pattern = Pattern("/some/:cool/pattern/:value")
 	assert.NotNil(t, pattern)
-	assert.Equal(t, pattern.regex.String(), "^\\/some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)$")
+	assert.Equal(t, pattern.Regex.String(), "^\\/some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)$")
 
 	pattern = Pattern("/some/:cool/pattern/:value/")
 	assert.NotNil(t, pattern)
-	assert.Equal(t, pattern.regex.String(), "^\\/some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)\\/$")
+	assert.Equal(t, pattern.Regex.String(), "^\\/some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)\\/$")
 }
 
 func TestMatch(t *testing.T) {

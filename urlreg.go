@@ -1,4 +1,4 @@
-package urlreg
+package urlregex
 
 import (
 	"errors"
@@ -9,8 +9,8 @@ import (
 
 var logger *golog.Logger
 
-type UrlReg struct {
-	regex *regexp.Regexp
+type UrlRegex struct {
+	Regex *regexp.Regexp
 }
 
 func init() {
@@ -20,9 +20,9 @@ func init() {
 
 // Method will collect named parameters values.
 // If there are not matches, method will return error.
-func (u *UrlReg) Match(url string) (map[string]string, error) {
-	params := u.regex.SubexpNames()
-	matches := u.regex.FindAllStringSubmatch(url, -1)
+func (u *UrlRegex) Match(url string) (map[string]string, error) {
+	params := u.Regex.SubexpNames()
+	matches := u.Regex.FindAllStringSubmatch(url, -1)
 
 	if matches == nil {
 		return nil, errors.New("cannot match " + url)
@@ -38,9 +38,9 @@ func (u *UrlReg) Match(url string) (map[string]string, error) {
 	return result, nil
 }
 
-// Converting regex into UrlReg object
+// Converting regex into UrlRegex object
 // Function will build regex with named groups to be able to extract parameters later
-func Pattern(pattern string) *UrlReg {
+func Pattern(pattern string) *UrlRegex {
 	parts := strings.Split(pattern, "/")
 	regex := "^"
 
@@ -69,7 +69,7 @@ func Pattern(pattern string) *UrlReg {
 
 	logger.Debug("regex: " + regex)
 
-	return &UrlReg{
-		regex: regexp.MustCompile(regex),
+	return &UrlRegex{
+		Regex: regexp.MustCompile(regex),
 	}
 }
