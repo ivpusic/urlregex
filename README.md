@@ -1,5 +1,6 @@
 urlregex
 ======
+[![Build Status](https://travis-ci.org/ivpusic/urlregex.svg?branch=master)](https://travis-ci.org/ivpusic/urlregex)
 
 express-like named url parameters extracting from url
 
@@ -7,6 +8,14 @@ Library will generate regex based on provided url pattern. Later you will be abl
 
 ## Example
 ```Go
+package main
+
+import (
+	"fmt"
+	"github.com/ivpusic/urlregex"
+)
+
+func main() {
 package main
 
 import (
@@ -39,7 +48,7 @@ name: 123
 other: 456
 ```
 
-You can also pass url pattern without names parameters, and later check if given url matches.
+You can also pass url pattern without named parameters, and later check if given url matches.
 ```Go
 package main
 
