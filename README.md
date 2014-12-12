@@ -69,5 +69,22 @@ not matched
 ```
 However if we passed ``some/123/path/456`` to ``Match`` method, then it would output ``matched``.
 
+#### Access actual go regex instance
+```Go
+package main
+
+import (
+	"fmt"
+	"github.com/ivpusic/urlregex"
+)
+
+func main() {
+	reg := urlregex.Pattern("some/:name/path/:other/")
+	// native generated *Regex instance
+	fmt.Println(reg.Regex)
+}
+
+```
+
 # License
 MIT
