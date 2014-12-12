@@ -1,5 +1,6 @@
 urlregex
 ======
+[![Build Status](https://travis-ci.org/ivpusic/urlregex.svg?branch=master)](https://travis-ci.org/ivpusic/urlregex)
 
 express-like named url parameters extracting from url
 
@@ -40,7 +41,7 @@ name: 123
 other: 456
 ```
 
-You can also pass url pattern without names parameters, and later check if given url matches.
+You can also pass url pattern without named parameters, and later check if given url matches.
 ```Go
 package main
 
