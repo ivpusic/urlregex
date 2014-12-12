@@ -13,13 +13,13 @@ import (
 )
 
 func main() {
-  // express-like url named params
+  	// express-like url named params
 	reg := urlregex.Pattern("some/:name/path/:other/")
 	
 	// extract named params values from given url string
 	res, err := reg.Match("some/123/path/456/")
 
-  // err returned -> no matches
+  	// err returned -> no matches
 	if err != nil {
 		fmt.Println("no matches")
 		return
