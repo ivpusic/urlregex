@@ -98,10 +98,20 @@ func TestMatch(t *testing.T) {
 	res, err = pattern.Match("/blabla/route/some/")
 	assert.Nil(t, err)
 
+	res, err = pattern.Match("/blabla")
+	assert.NotNil(t, err)
+
 	pattern = Pattern("*")
 	res, err = pattern.Match("/some/route")
 	assert.Nil(t, err)
 
 	res, err = pattern.Match("/blabla/route/some/")
 	assert.Nil(t, err)
+
+	// combine wildcard and url-params
+	pattern = Pattern("some/:cool/*/:value")
+	res, err = pattern.Match("some/123/pattern/456")
+	assert.Nil(t, err)
+	assert.Equal(t, res["cool"], "123")
+	assert.Equal(t, res["value"], "456")
 }
