@@ -43,11 +43,16 @@ func Pattern(pattern string) UrlRegex {
 			}
 
 			// do we have special character?
-			switch part[0] == ':' {
-			case true:
+			switch part[0] {
+			case ':':
 				groupName := "(?P<" + part[1:] + ">"
 				regex += groupName + ".[^\\/]*)"
-			case false:
+			case '*':
+				regex += ".*"
+				if part[len(part)-1] == '/' {
+					regex += "\\/"
+				}
+			default:
 				regex += regexp.QuoteMeta(part)
 			}
 		}

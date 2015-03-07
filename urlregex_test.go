@@ -21,6 +21,14 @@ func TestPattern(t *testing.T) {
 	pattern = Pattern("/some/:cool/pattern/:value/")
 	assert.NotNil(t, pattern)
 	assert.Equal(t, pattern.Regex.String(), "^\\/some\\/(?P<cool>.[^\\/]*)\\/pattern\\/(?P<value>.[^\\/]*)\\/$")
+
+	pattern = Pattern("/some/*")
+	assert.NotNil(t, pattern)
+	assert.Equal(t, pattern.Regex.String(), "^\\/some\\/.*$")
+
+	pattern = Pattern("*")
+	assert.NotNil(t, pattern)
+	assert.Equal(t, pattern.Regex.String(), "^.*$")
 }
 
 func TestMatch(t *testing.T) {
@@ -68,4 +76,32 @@ func TestMatch(t *testing.T) {
 	pattern = Pattern("/some/:cool/pattern/:value/")
 	res, err = pattern.Match("some/123/pattern/456/")
 	assert.NotNil(t, err)
+
+	// test wildcard
+	pattern = Pattern("/blabla/*/some")
+	res, err = pattern.Match("/blabla/route/some")
+	assert.Nil(t, err)
+
+	res, err = pattern.Match("/blabl/route/some")
+	assert.NotNil(t, err)
+
+	res, err = pattern.Match("/blabla/route/")
+	assert.NotNil(t, err)
+
+	res, err = pattern.Match("/blabla/route")
+	assert.NotNil(t, err)
+
+	pattern = Pattern("/blabla/*")
+	res, err = pattern.Match("/blabla/route/some")
+	assert.Nil(t, err)
+
+	res, err = pattern.Match("/blabla/route/some/")
+	assert.Nil(t, err)
+
+	pattern = Pattern("*")
+	res, err = pattern.Match("/some/route")
+	assert.Nil(t, err)
+
+	res, err = pattern.Match("/blabla/route/some/")
+	assert.Nil(t, err)
 }
