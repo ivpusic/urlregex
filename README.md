@@ -91,7 +91,29 @@ func main() {
 	// native generated *Regex instance
 	fmt.Println(reg.Regex)
 }
+```
 
+#### Wildcards
+```Go
+package main
+
+import (
+	"fmt"
+	"github.com/ivpusic/urlregex"
+)
+
+func main() {
+	reg := urlregex.Pattern("some/*")
+	
+	// this will be matched
+	reg.Match("some/123")
+	
+	// this also
+	reg.Match("some/blabla/blabla")
+	
+	// but this won't
+	reg.Match("some")
+}
 ```
 
 # License
