@@ -113,6 +113,15 @@ func main() {
 	
 	// but this won't
 	reg.Match("some")
+	
+	// you can combine wildcards and url params
+	reg = urlregex.Pattern("/some/:name/*/path")
+	
+	// this will be matched
+	reg.Match("/some/user/blabla/path")
+	
+	// but this won't
+	reg.Match("/some/user/blabla/missing")
 }
 ```
 
