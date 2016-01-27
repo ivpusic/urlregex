@@ -48,7 +48,13 @@ func Pattern(pattern string) UrlRegex {
 				groupName := "(?P<" + part[1:] + ">"
 				regex += groupName + ".[^\\/]*)"
 			case '*':
-				regex += ".*"
+				//support named wildcards
+				if len(part) > 1 {
+					groupName := "(?P<" + part[1:] + ">"
+					regex += groupName + ".*)"
+				} else {
+					regex += ".*"
+				}
 				if part[len(part)-1] == '/' {
 					regex += "\\/"
 				}
