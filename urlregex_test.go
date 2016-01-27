@@ -29,6 +29,11 @@ func TestPattern(t *testing.T) {
 	pattern = Pattern("*")
 	assert.NotNil(t, pattern)
 	assert.Equal(t, pattern.Regex.String(), "^.*$")
+
+	//named wildcard
+	pattern = Pattern("/*key")
+	assert.NotNil(t, pattern)
+	assert.Equal(t, pattern.Regex.String(), "^\\/(?P<key>.*)$")
 }
 
 func TestMatch(t *testing.T) {
@@ -114,4 +119,10 @@ func TestMatch(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, res["cool"], "123")
 	assert.Equal(t, res["value"], "456")
+
+	// named wildcard
+	pattern = Pattern("some/*key")
+	res, err = pattern.Match("some/this/is/a/key")
+	assert.Nil(t, err)
+	assert.Equal(t, res["key"], "this/is/a/key")
 }
