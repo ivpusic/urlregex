@@ -122,6 +122,12 @@ func main() {
 	
 	// but this won't
 	reg.Match("/some/user/blabla/missing")
+	
+	// named wildcards
+	reg := urlregex.Pattern("some/*key")
+	res, _ := reg.Match("/some/this/is/a/key")
+	fmt.Println(res["key"])
+	//--> this/is/a/key
 }
 ```
 
